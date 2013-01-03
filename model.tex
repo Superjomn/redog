@@ -1,0 +1,49 @@
+\documentclass[a4paper]{article}
+\usepackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+\author{Chunwei Yan}
+
+\title{SVD++ 模型理解}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\setCJKmainfont{SimSun}
+%\setCJKmainfont{WenQuanYi Micro Hei Mono}
+\begin{document}
+    \maketitle
+SVD++融合以下模型或元素:
+\begin{enumerate}
+\item Baseline model
+\item Latent factor model
+\item Implicit feedback
+\end{enumerate}
+
+\section{Baseline model}
+\par 有一般情况下，可以想象，一些用户倾向于总给电影打高分/低分，类似的，一些电影也倾向于总得到高分/低分。体现在模型上，可以有两个参数$b_u, b_i$
+\begin{itemize}
+\item $b_u$是用户$u$相对于平均评分$\mu$的偏差
+\item $b_i$是电影$i$相对于$\mu$的偏差
+\end{itemize}
+\par 那么最终的预测模型就是
+\begin{equation}
+    \hat{r}_{ui} = \mu + b_u + b_i
+\end{equation}
+
+\section{Latent factor model}
+\par 利用非负矩阵分解的方法，将$\triangle r$分解为两个矩阵
+\begin{equation}
+    \triangle r = p_u^T q_i
+\end{equation}
+\begin{enumerate}
+\item $p_u$ 与用户$u$相关的k维矩阵
+\item $p_i$ 与电影$i$相关的k维矩阵
+\end{enumerate}
+\par 最终的估计模型:
+\begin{equation}
+    \hat{r}_{ui} = b_{ui} + p_u^T q_i
+\end{equation}
+
+
+
+
+\end{document}
+
