@@ -1,1 +1,0 @@
-hell.d: ../hell.cpp
