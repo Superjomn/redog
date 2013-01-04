@@ -2,9 +2,11 @@ Debug/*
 try*
 *.o
 Debug/*
-.meta*
+.metadata
 .*
 *.aux
 *.log
 *.pyx
+*.db
+redog/Debug
 

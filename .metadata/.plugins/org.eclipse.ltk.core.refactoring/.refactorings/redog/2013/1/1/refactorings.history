@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;redog/try&apos; to &apos;try.cpp&apos;" description="Rename resource &apos;try&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="try" name="try.cpp" stamp="1357198348334" updateReferences="true"/>
-</session>

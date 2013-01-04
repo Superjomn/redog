@@ -1,8 +1,0 @@
-'''
-Created on Jan 3, 2013
-
-@author: chunwei
-'''
-def canfind(strr, s):
-    try:
-        strr.
