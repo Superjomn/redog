@@ -1,0 +1,39 @@
+'''
+Created on Jan 3, 2013
+
+@author: chunwei
+'''
+from sets import Set
+import common
+import os
+
+class IDTranser:
+    '''
+    parse all trainingset and find all userid in a set
+    then sort the set and output to a file
+    '''
+    def __init__(self, dir):
+        self.set = Set()
+        self._dir = dir
+    
+    def load(self):
+        self._dir = dir
+        files = os.listdir(dir)
+        for f in files:
+            path = os.path.join(self._dir, f)
+            f = open(path)
+            content = f.read()
+            yield content
+            f.close()
+    
+    def parse(self, lines):
+        for c in self.load(dir):
+            lines = c.split('\n')
+            for l in lines:
+                print '.. the movie ID'
+                if common.canfind(l, ':'): continue
+                # the line contains userid
+                words = l.split()
+                userid = words[0]
+                self.set.add(int(userid))
+     

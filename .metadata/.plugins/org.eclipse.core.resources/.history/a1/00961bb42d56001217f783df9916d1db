@@ -1,0 +1,36 @@
+/*
+ * TrainSetLoader.h
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#ifndef TRAINSETLOADER_H_
+#define TRAINSETLOADER_H_
+
+#include "common.h"
+#include <sstream>
+#include "pretreator/DataLoader.h"
+#include "pretreator/UserIDTransfer.h"
+using namespace std;
+
+namespace redog {
+
+class TrainSetLoader : public DataLoader{
+private:
+	string listpath;
+	vector<TrainRecord> datas;
+	int filenum;
+	// compare for sort ; first userid then itemid
+	bool _compare(TrainRecord &a, TrainRecord &b);
+public:
+	TrainSetLoader(string listpath="/home/chunwei/NetFlixData/trainset_paths.red");
+	//parse sigle training file
+	bool parse(char *path);
+    //sort datas: first userid then itemid
+	void sort();
+	vector<string> &split(const std::string &s, char delim);
+};
+
+} /* namespace redog */
+#endif /* TRAINSETLOADER_H_ */

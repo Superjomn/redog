@@ -1,0 +1,30 @@
+/*
+ * TrainSetLoader.h
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#ifndef TRAINSETLOADER_H_
+#define TRAINSETLOADER_H_
+
+#include "common.h"
+#include "pretreator/DataLoader.h"
+#include "pretreator/UserIDTransfer.h"
+using namespace std;
+
+namespace redog {
+
+class TrainSetLoader : public DataLoader{
+private:
+	string listpath;
+public:
+	TrainSetLoader(string listpath="/home/chunwei/NetFlixData/trainset_paths.red");
+	bool parse(char *path);
+	virtual ~TrainSetLoader();
+    //parse sigle training file
+
+};
+
+} /* namespace redog */
+#endif /* TRAINSETLOADER_H_ */

@@ -1,0 +1,30 @@
+/*
+ * UserIDTransfer.h
+ *
+ *  Created on: Jan 3, 2013
+ *      Author: chunwei
+ */
+
+#ifndef USERIDTRANSFER_H_
+#define USERIDTRANSFER_H_
+#include "common.h"
+#include <string>
+using namespace std;
+
+namespace redog {
+
+class UserIDTransfer {
+private:
+	int fid[USER_NUM];
+public:
+	//从文件中载入 userids
+	UserIDTransfer(string path="/home/chunwei/NetFlixData/userids.red");
+	int a_to_f(int id);
+	int f_to_a(int id);
+	virtual ~UserIDTransfer();
+
+
+};
+
+} /* namespace redog */
+#endif /* USERIDTRANSFER_H_ */

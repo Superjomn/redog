@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "pretreator/UserIDTransfer.h"
+#include "pretreator/TrainSetLoader.h"
 using namespace std;
 using namespace redog;
 
@@ -22,10 +23,24 @@ void testUserIDTransfer(){
 	}
 }
 
+void testTrainSetLoader(){
+    TrainSetLoader tl;
+    /*
+    tl.load();
+    tl.show();
+    tl._sort();
+    tl.show();
+    tl.tofile();
+    */
+    tl.fromfile();
+}
+
 
 int main(){
+
 	cout<<"hello"<<endl;
-	testUserIDTransfer();
+	//testUserIDTransfer();
+	testTrainSetLoader();
 	return 0;
 }
 

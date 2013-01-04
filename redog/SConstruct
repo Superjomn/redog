@@ -1,1 +1,1 @@
-Program("hell", Split("hell.cpp pretreator/UserIDTransfer.cpp"))
+Program("hell", Split("hell.cpp common.cpp pretreator/UserIDTransfer.cpp pretreator/DataLoader.cpp pretreator/TrainSetLoader.cpp"))

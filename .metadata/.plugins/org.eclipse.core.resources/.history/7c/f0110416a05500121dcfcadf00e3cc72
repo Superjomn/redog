@@ -1,0 +1,10 @@
+'''
+Created on Jan 3, 2013
+
+@author: chunwei
+'''
+class RecordReverse:
+    def __init__(self, dir='/home/chunwei/NetFlixData/training_set/'):
+        self.datadic = {}
+    
+    

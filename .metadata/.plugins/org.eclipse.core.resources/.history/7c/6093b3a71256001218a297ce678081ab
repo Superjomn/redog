@@ -1,0 +1,22 @@
+/*
+ * hell.cpp
+ *
+ *  Created on: Jan 3, 2013
+ *      Author: chunwei
+ */
+#include <iostream>
+
+#include "UserIDTransfer.h"
+using namespace std;
+using namespace redog;
+
+int main(){
+	cout<<"hello"<<endl;
+	UserIDTransfer it = UserIDTransfer();
+
+	return 0;
+}
+
+
+
+

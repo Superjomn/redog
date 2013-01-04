@@ -1,0 +1,8 @@
+'''
+Created on Jan 3, 2013
+
+@author: chunwei
+'''
+class RecordReverse:
+    def __init__(self):
+        self.datadic = {}

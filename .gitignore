@@ -1,0 +1,10 @@
+Debug/*
+try*
+*.o
+Debug/*
+.meta*
+.*
+*.aux
+*.log
+*.pyx
+

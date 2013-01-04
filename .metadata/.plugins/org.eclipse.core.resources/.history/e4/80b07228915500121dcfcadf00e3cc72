@@ -1,0 +1,12 @@
+'''
+Created on Jan 3, 2013
+
+@author: chunwei
+'''
+from sets import Set
+
+class IDTranser:
+    def __init__(self):
+        self.set = Set()
+    
+    def load(self, dir):

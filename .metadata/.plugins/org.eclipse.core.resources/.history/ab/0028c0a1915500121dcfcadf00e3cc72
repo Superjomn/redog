@@ -1,0 +1,19 @@
+'''
+Created on Jan 3, 2013
+
+@author: chunwei
+'''
+from sets import Set
+import os
+
+class IDTranser:
+    def __init__(self):
+        self.set = Set()
+        self._dir = ''
+    
+    def load(self, dir = '~/chunwei/'):
+        self._dir = dir
+        files = os.listdir(dir)
+    
+    def parse(self, lines):
+     

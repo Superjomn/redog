@@ -1,0 +1,27 @@
+/*
+ * hell.cpp
+ *
+ *  Created on: Jan 3, 2013
+ *      Author: chunwei
+ */
+#include <iostream>
+#include <vector>
+#include "UserIDTransfer.h"
+using namespace std;
+using namespace redog;
+
+void testUserIDTransfer(){
+	vector<int> uids = {685, 233};
+}
+
+
+int main(){
+	cout<<"hello"<<endl;
+	UserIDTransfer it = UserIDTransfer();
+
+	return 0;
+}
+
+
+
+

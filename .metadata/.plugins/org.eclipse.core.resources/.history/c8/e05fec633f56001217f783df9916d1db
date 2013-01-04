@@ -1,0 +1,17 @@
+/*
+ * common.cpp
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#include "common.h"
+
+namespace redog{
+//paths
+Common::
+string Common::trainset_data_path = "/home/chunwei/NetFlixData/trainset_datas.red";
+
+
+
+};

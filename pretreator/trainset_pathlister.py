@@ -1,6 +1,6 @@
 import os
 
-class PathCreator:
+class TrainSetPathsCreator:
     def __init__(self, dir='/home/chunwei/NetFlixData/training_set/', tofile='/home/chunwei/NetFlixData/trainset_paths.red'):
         self._dir = dir
         self._tofile = tofile
@@ -26,7 +26,7 @@ class PathCreator:
         f.close()
 
 if __name__ == '__main__':
-    p = PathCreator()
+    p = TrainSetPathsCreator()
     p.parse()
 
 

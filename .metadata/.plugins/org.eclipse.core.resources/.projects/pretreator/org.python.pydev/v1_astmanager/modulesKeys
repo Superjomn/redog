@@ -1,0 +1,6 @@
+MODULES_MANAGER_V2
+common|/home/chunwei/Project/pretreator/common.py
+idtranser|/home/chunwei/Project/pretreator/idtranser.py
+recordreverse|/home/chunwei/Project/pretreator/recordreverse.py
+table_def|/home/chunwei/Project/pretreator/table_def.py
+trainset_pathlister|/home/chunwei/Project/pretreator/trainset_pathlister.py

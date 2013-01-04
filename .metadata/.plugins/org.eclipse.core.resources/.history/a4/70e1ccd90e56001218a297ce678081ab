@@ -1,0 +1,32 @@
+/*
+ * UserIDTransfer.cpp
+ *
+ *  Created on: Jan 3, 2013
+ *      Author: chunwei
+ */
+
+#include "UserIDTransfer.h"
+
+namespace redog {
+
+UserIDTransfer::UserIDTransfer(string path="/home/chunwei/NetFlixData/userids.red") {
+	// TODO Auto-generated constructor stub
+	ifstream file = ifstream(path);
+	char strtem[256];
+	if (!file.is_open()) {
+		cout<<"Error: file can't be opened!"<<endl;
+		return;
+	}
+	int lineNum = 0;
+	while(file.getline(strtem, 256)){
+		string strr(strtem);
+		//parse to int
+
+	}
+}
+
+UserIDTransfer::~UserIDTransfer() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace redog */

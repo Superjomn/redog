@@ -1,0 +1,26 @@
+/*
+ * DataLoader.h
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#ifndef DATALOADER_H_
+#define DATALOADER_H_
+
+namespace redog {
+
+class DataLoader {
+public:
+	DataLoader();
+	//载入数据
+	bool load(char *ph);
+	//从已经压缩的二进制文件中载入数据
+	bool fromfile(char *ph);
+	//输出压缩的二进制文件
+	bool tofile(char *ph);
+	virtual ~DataLoader();
+};
+
+} /* namespace redog */
+#endif /* DATALOADER_H_ */

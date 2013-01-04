@@ -1,0 +1,61 @@
+/*
+ * TrainSetLoader.cpp
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#include "pretreator/TrainSetLoader.h"
+
+namespace redog {
+
+TrainSetLoader::TrainSetLoader(string listpath) {
+	// TODO Auto-generated constructor stub
+	this->listpath = listpath;
+	this->filenum = 0;
+
+}
+
+
+bool TrainSetLoader::load(char *ph = "/home/chunwei/NetFlixData/training_set") {
+    // load path list file
+	ifstream trainpaths(this->listpath);
+	if (!trainpaths.is_open()) { cout<<".. can't open train paths list file!"<<endl; return false;}
+	char strtem[256];
+	while(trainpaths.getline(strtem, 256)){
+		//get a path, open the path and start to parse
+        if(!this->parse(strtem)) return false;
+	}
+    trainpaths.close();
+    return true;
+}
+
+bool TrainSetLoader::parse(char *path){
+    ifstream file(path);
+    int itemid;
+
+	if (!file.is_open()) { cout<<".. can't open "<<path<<endl; return false;}
+    //parse content
+    char strtem[256];
+    while(file.getline(strtem, 256)){
+    	string line(strtem);
+    	int pos = line.find(":");
+    	//find :
+    	if(-1 != pos){
+    		itemid = atoi(line.substr(0, pos).c_str());
+    		assert(itemid != 0);
+    	}
+    }
+
+
+
+    file.close();
+    return true;
+
+}
+
+TrainSetLoader::~TrainSetLoader() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace redog */

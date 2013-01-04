@@ -1,0 +1,22 @@
+/*
+ * TrainSetLoader.h
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#ifndef TRAINSETLOADER_H_
+#define TRAINSETLOADER_H_
+#include "pretreator/DataLoader.h"
+#include "pretreator/UserIDTransfer.h"
+
+namespace redog {
+
+class TrainSetLoader : public DataLoader{
+public:
+	TrainSetLoader();
+	virtual ~TrainSetLoader();
+};
+
+} /* namespace redog */
+#endif /* TRAINSETLOADER_H_ */

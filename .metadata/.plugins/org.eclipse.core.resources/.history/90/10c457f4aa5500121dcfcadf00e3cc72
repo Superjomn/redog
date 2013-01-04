@@ -1,0 +1,27 @@
+/*
+ * UserIDTransfer.h
+ *
+ *  Created on: Jan 3, 2013
+ *      Author: chunwei
+ */
+
+#ifndef USERIDTRANSFER_H_
+#define USERIDTRANSFER_H_
+#include "common.h"
+#include <string>
+using namespace std;
+
+namespace redog {
+
+class UserIDTransfer {
+private:
+	int fid[USER_NUM];
+public:
+	UserIDTransfer();
+	virtual ~UserIDTransfer();
+
+
+};
+
+} /* namespace redog */
+#endif /* USERIDTRANSFER_H_ */

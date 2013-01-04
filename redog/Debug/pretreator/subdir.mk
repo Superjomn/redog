@@ -3,13 +3,24 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
+O_SRCS += \
+../pretreator/DataLoader.o \
+../pretreator/TrainSetLoader.o \
+../pretreator/UserIDTransfer.o 
+
 CPP_SRCS += \
+../pretreator/DataLoader.cpp \
+../pretreator/TrainSetLoader.cpp \
 ../pretreator/UserIDTransfer.cpp 
 
 OBJS += \
+./pretreator/DataLoader.o \
+./pretreator/TrainSetLoader.o \
 ./pretreator/UserIDTransfer.o 
 
 CPP_DEPS += \
+./pretreator/DataLoader.d \
+./pretreator/TrainSetLoader.d \
 ./pretreator/UserIDTransfer.d 
 
 

@@ -1,0 +1,27 @@
+/*
+ * TrainSetLoader.cpp
+ *
+ *  Created on: Jan 4, 2013
+ *      Author: chunwei
+ */
+
+#include "TrainSetLoader.h"
+
+namespace redog {
+
+TrainSetLoader::TrainSetLoader() {
+	// TODO Auto-generated constructor stub
+
+}
+
+
+bool TrainSetLoader::load(char *ph = "/home/chunwei/NetFlixData/training_set") {
+    
+}
+
+
+TrainSetLoader::~TrainSetLoader() {
+	// TODO Auto-generated destructor stub
+}
+
+} /* namespace redog */
