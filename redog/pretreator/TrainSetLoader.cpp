@@ -25,6 +25,7 @@ bool TrainSetLoader::load() {
 		//get a path, open the path and start to parse
         if(!this->parse(strtem)) return false;
 	}
+	cout<<".. parse end"<<endl;
     trainpaths.close();
     return true;
 }
@@ -44,7 +45,11 @@ bool TrainSetLoader::parse(char *path){
     		itemid = atoi(line.substr(0, pos).c_str());
     		assert(itemid != 0);
     		++ this->filenum;
-    		if(this->filenum % 500 == 0){cout<<".. parsed "<<this->filenum<<" files!"<<endl;}
+    		if(this->filenum % 500 )//== 0)
+    		{
+    			cout<<".. parsed "<<this->filenum<<" files!"<<endl;
+    			cout<<".. datas size:"<<this->datas.size()<<endl;
+    		}
     		// to following record lines
     		continue;
     	}
@@ -61,7 +66,6 @@ bool TrainSetLoader::parse(char *path){
     }
     file.close();
     return true;
-
 }
 
 bool mycompare(const TrainRecord &a,const TrainRecord &b){

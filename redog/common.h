@@ -20,19 +20,19 @@ using namespace std;
 
 namespace redog{
 typedef struct{
-	int userid;
-	int itemid;
-	short score;
+	unsigned int userid;
+	unsigned short itemid;
+	char score;
 } TrainRecord;
 
 typedef struct{
-	int itemid;
-	short score;
+	unsigned short itemid;
+	char score;
 } RateRecord;
 
 typedef struct{
-	int itemid;
-	int userid;
+	unsigned short itemid;
+	unsigned int userid;
 } ProbeRecord;
 
 
@@ -46,6 +46,8 @@ public:
 	static string trainset_file_pathlist;
 	//生成的二进制文件路径
 	static string trainset_datas_path;
+    //probe
+    static string probeset_file_path;
 
 	//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 	//training set data matrix

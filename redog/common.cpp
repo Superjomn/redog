@@ -12,5 +12,7 @@ namespace redog{
 string Common::trainset_dir_path = "/home/chunwei/NetFlixData/trainset_datas.red";
 string Common::trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset_paths.red";
 string Common::trainset_datas_path = "/home/chunwei/NetFlixData/trainset_datas.red";
+string Common::probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
+
 vector < vector<RateRecord> > Common::rateMatrix;
 };//namespace
