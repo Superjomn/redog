@@ -13,13 +13,15 @@
 namespace redog {
 
 class ProbeLoader {
+private:
+    vector<ProbeRecord> datas;
 public:
 	ProbeLoader();
     bool load();
-	bool fromfile();
-	bool tofile();
-
-
+    bool parse(ifstream &file);
+    void show();
+	//bool fromfile();
+	//bool tofile();
 };
 
 } /* namespace redog */
