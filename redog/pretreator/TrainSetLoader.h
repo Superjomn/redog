@@ -39,6 +39,7 @@ public:
 	//从 datas init rateMatrix
 	void _initRateMatrix();
 	void show();
+    void showRateMatrix();
 };
 
 } /* namespace redog */

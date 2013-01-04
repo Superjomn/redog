@@ -44,7 +44,7 @@ bool TrainSetLoader::parse(char *path){
     		itemid = atoi(line.substr(0, pos).c_str());
     		assert(itemid != 0);
     		++ this->filenum;
-    		if(this->filenum % 2000){cout<<".. parsed "<<this->filenum<<" files!"<<endl;}
+    		if(this->filenum % 500 == 0){cout<<".. parsed "<<this->filenum<<" files!"<<endl;}
     		// to following record lines
     		continue;
     	}
@@ -118,12 +118,32 @@ bool TrainSetLoader::fromfile()
     	cout<<i<<" :"<<t.userid<<" "<<t.itemid<<endl;
     }
     */
+    this->datas.assign(this->darr, this->darr+size);
     delete this->darr;
     file.close();
+    //this->show();
+    this->_initRateMatrix();
+    //this->showRateMatrix();
     return true;
 }
 
+void TrainSetLoader::showRateMatrix()
+{
+    for(long i=0; i<USER_NUM; ++i)
+    {
+        if(!Common::rateMatrix[i].empty())
+        {
+            cout<<i<<" : "<<Common::rateMatrix[i].size()<<endl;
+            for(int j=0; j<Common::rateMatrix[i].size(); ++j)
+            {
+                cout<<".. record: "<<Common::rateMatrix[i][j].itemid<<endl;
+            }
+        }
+    }
+}
+
 void TrainSetLoader::_initRateMatrix(){
+    cout<<".. _initRateMatrix"<<endl;
     vector<RateRecord> temv;
     int a_userid = -1;
     int temuserid = -1;
