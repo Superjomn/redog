@@ -27,6 +27,7 @@ private:
 	Bias bias;
 	Implicit implicit;
 	SVD svd;
+
 public:
 	Model();
 	float RMSEProbe();
@@ -43,6 +44,8 @@ public:
 	//预测qualis的score 并写入中央公共数据集
 	//之后可以写入文件
 	void calQualis();
+    //将qualis写入文件 最好写一个专门的类
+    bool qualisToFile();
 	//virtual ~Model();
 };
 

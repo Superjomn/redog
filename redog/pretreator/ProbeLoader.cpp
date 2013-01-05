@@ -17,8 +17,8 @@ bool ProbeLoader::load(){
 	if (!file.is_open()) { cout<<".. can't open probe file!"<<endl; return false;}
     //start to parse 
     this->parse(file); 
-
     file.close();
+    initProbeScores();
 	return true;
 }
 
@@ -46,6 +46,26 @@ bool ProbeLoader::parse(ifstream &file){
     	this->datas.push_back(r);
     }
     return true;
+}
+
+void ProbeLoader::initProbeScores(){
+	cout<<"init Probes Scores"<<endl;
+	ProbeRecord *cur;
+	TrainRecord *currate;
+	for(uint i=0; i<probes.size(); ++i){
+		cur = &probes[i];
+		//find this item
+		//已经根据itemid排序 最好是直接搜索得到！！！
+		for(uint j=0; j<rateMatrix[cur->userid].size(); ++j){
+			currate = &rateMatrix[cur->userid][j];
+			if(currate->itemid == cur->itemid){
+				cur->score = currate->score;
+				break;
+			}
+		}
+		assert(cur->score != 0);
+
+	}
 }
 
 void ProbeLoader::show(){

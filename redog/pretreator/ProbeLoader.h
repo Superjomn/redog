@@ -20,6 +20,8 @@ public:
 	ProbeLoader();
     bool load();
     bool parse(ifstream &file);
+    //直接将probe的score从rateMatix中查询写入
+    void initProbeScores();
     void show();
 	//bool fromfile();
 	//bool tofile();

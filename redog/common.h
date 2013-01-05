@@ -24,6 +24,11 @@ namespace redog{
 typedef unsigned int uint;
 typedef unsigned short ushort;
 
+typedef enum{
+	NetFlix,
+	Test
+}Mode;
+
 typedef struct{
 	uint userid;
 	ushort itemid;
@@ -41,20 +46,29 @@ typedef struct{
     char score;
 } ProbeRecord;
 
+typedef struct{
+	ushort itemid;
+	uint userid;
+    unsigned float score;
+} QualiRecord;
+
 template<class Type>
 void setValue(Type arr[], int size, Type v);
 
 
 float dot(float puTemp[], float q[], int dim);
 
+const static string netflix_dir = "/home/chunwei/NetFlixData/";
+const static string test_dir = "/home/chunwei/SVDPPTest/";
 //paths ----------------------------------------------------------------------------------
-const static string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
-const static string trainset_dir_path = "/home/chunwei/NetFlixData/trainset_datas.red";
+static string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
+static string trainset_dir_path = "/home/chunwei/NetFlixData/trainset_datas.red";
+static string predict_data_path = "/home/chunwei/NetFlixData/predict_datas.red";
 //python 生成的file列表文件
-const static string trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset_paths.red";
+static string trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset_paths.red";
 //生成的二进制文件路径
-const static string trainset_datas_path = "/home/chunwei/NetFlixData/trainset_datas.red";
-const static string probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
+static string trainset_datas_path = "/home/chunwei/NetFlixData/trainset_datas.red";
+static string probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //
 //----------------------------------------------------------------------------------------
@@ -62,7 +76,7 @@ const static string probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
 //need to initize space later
 static vector < vector<RateRecord> > rateMatrix;
 //qualifying datas 评估数据
-static vector <ProbeRecord> qualis;
+static vector <QualiRecord> qualis;
 //probe records
 static vector <ProbeRecord> probes;
 

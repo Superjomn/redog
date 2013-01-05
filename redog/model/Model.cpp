@@ -30,6 +30,8 @@ void Model::iterate(){
 	update();
 	if(goodEnough()){
 		cout<<" .. succeed end"<<endl;
+        //将上次最佳状态的数据写入文件
+        qualisToFile();
 	}else{
 		cout<<".. run step: "<<step<<endl;
 		update();
@@ -58,6 +60,7 @@ float Model::RMSEProbe(){
 	for(uint i=0; i<size; ++i){
 		//此处文件中的userid 需要进行转化
 		prate = predictRate(probes[i].userid, probes[i].itemid, K);
+		//!!! probe的score需要提前初始化
 		err = prate - probes[i].score;
 		rmse += err*err;
 	}
@@ -105,7 +108,7 @@ void Model::initPuTemp(){
 void Model::initNuNum(){
 	//init nuNum
 	for(uint i=0; i<USER_NUM; ++i){
-		qualis[i] = 0;
+		nuNum[i] = 0;
 	}
 	//first from qualis
 	for(uint i=0; i<qualis.size(); ++i){
@@ -168,9 +171,33 @@ bool Model::goodEnough(){
 		return true;
 	}
 }
-/*
-Model::~Model() {
-	// TODO Auto-generated destructor stub
-}*/
+
+bool Model::qualisToFile()
+{
+    cout<<".. predict data to "<<predict_data_path<<endl;
+	ofstream file;
+    file.open(predict_data_path.c_str());
+	if(! file.is_open()){cout<<".. can't open predict file: "<<predict_data_path<<endl; return false;}
+    //write data to file
+    uint curItem = -1;
+    QualiRecord *cur;
+    for(uint i=0; i<qualis.size(); ++i)
+    {
+        cur = &qualis[i];
+        assert(0<cur->score && cur->score <= 5.0);
+        if(cur->itemid != curItem)
+        {
+            file<<cur->itemid<<":"<<endl;
+            curItem = cur->itemid;
+        }
+        file<<cur->score<<endl;
+    }
+    //end write
+    file.close();
+    cout<<".. end predict"<<endl;
+    cout<<".. program halt!"<<endl;
+    return true;
+}
+
 
 } /* namespace redog */
