@@ -1,5 +1,6 @@
 files = Split("""
     hell.cpp 
+    Test.cpp
     common.cpp 
     pretreator/UserIDTransfer.cpp 
     pretreator/TrainSetLoader.cpp 

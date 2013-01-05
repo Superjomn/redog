@@ -61,14 +61,14 @@ float dot(float puTemp[], float q[], int dim);
 const static string netflix_dir = "/home/chunwei/NetFlixData/";
 const static string test_dir = "/home/chunwei/SVDPPTest/";
 //paths ----------------------------------------------------------------------------------
-static string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
-static string trainset_dir_path = "/home/chunwei/NetFlixData/trainset_datas.red";
-static string predict_data_path = "/home/chunwei/NetFlixData/predict_datas.red";
+static string qualify_data_path = "qualifying.txt";
+static string trainset_dir_path = "trainset_datas.red";
+static string predict_data_path = "predict_datas.red";
 //python 生成的file列表文件
-static string trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset_paths.red";
+static string trainset_file_pathlist = "trainset_paths.red";
 //生成的二进制文件路径
-static string trainset_datas_path = "/home/chunwei/NetFlixData/trainset_datas.red";
-static string probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
+static string trainset_datas_path = "trainset_datas.red";
+static string probeset_file_path = "probe.txt";
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //
 //----------------------------------------------------------------------------------------
