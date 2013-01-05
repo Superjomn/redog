@@ -1,1 +1,13 @@
-Program("hell", Split("hell.cpp common.cpp pretreator/UserIDTransfer.cpp pretreator/DataLoader.cpp pretreator/TrainSetLoader.cpp pretreator/ProbeLoader.cpp"))
+files = Split("""
+    hell.cpp 
+    common.cpp 
+    pretreator/UserIDTransfer.cpp 
+    pretreator/TrainSetLoader.cpp 
+    pretreator/ProbeLoader.cpp 
+    pretreator/QualiSetLoader.cpp
+    model/Model.cpp
+    model/Bias.cpp 
+    model/Implicit.cpp 
+    model/SVD.cpp 
+""")
+Program("hell", files)

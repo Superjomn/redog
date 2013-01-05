@@ -9,6 +9,7 @@
 #include "pretreator/UserIDTransfer.h"
 #include "pretreator/TrainSetLoader.h"
 #include "pretreator/ProbeLoader.h"
+#include "pretreator/QualiSetLoader.h"
 using namespace std;
 using namespace redog;
 
@@ -43,13 +44,21 @@ void testProbeLoader()
     pl.show();
 }
 
+void testQualiSetLoader()
+{
+    QualiSetLoader qs;
+    qs.load();
+    qs.show();
+}
+
 
 int main(){
 
 	cout<<"hello"<<endl;
 	//testUserIDTransfer();
 	//testTrainSetLoader();
-    testProbeLoader();
+    //testProbeLoader();
+    testQualiSetLoader();
 	return 0;
 }
 

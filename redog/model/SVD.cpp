@@ -15,19 +15,7 @@ SVD::SVD() {
 }*/
 
 void SVD::init(){
-	//仅仅赋值为1
-	//init p
-	for(uint i=0; i<USER_NUM; ++i){
-		for(uint j=0; j<K; ++j){
-			p[i][j] = 0.0;
-		}
-	}
-	//int q
-	for(uint i=0; i<ITEM_NUM; ++i){
-		for(uint j=0; j<K; ++j){
-			p[i][j] = 0.0;
-		}
-	}
+	return;
 }
 
 } /* namespace redog */

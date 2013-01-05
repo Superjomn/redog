@@ -4,8 +4,6 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 O_SRCS += \
-../UserIDTransfer.o \
-../common.o \
 ../hell.o 
 
 CPP_SRCS += \

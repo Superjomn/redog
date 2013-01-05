@@ -31,6 +31,7 @@ public:
 	Model();
 	float RMSEProbe();
 	float predictRate(int user, int item, int dim);
+	//main function
 	void iterate();
 	bool goodEnough();
 	//更新各个参数
@@ -38,6 +39,10 @@ public:
 	void initPuTemp();
 	//implicit
 	void initNuNum();
+	void initMean();
+	//预测qualis的score 并写入中央公共数据集
+	//之后可以写入文件
+	void calQualis();
 	//virtual ~Model();
 };
 

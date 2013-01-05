@@ -40,18 +40,15 @@ typedef struct{
 	uint userid;
     char score;
 } ProbeRecord;
-/*
 
-template<class Type>
-void setValue(Type arr[][], int size, int dim, Type (*Value)(int i, int j));
-*/
 template<class Type>
 void setValue(Type arr[], int size, Type v);
 
 
 float dot(float puTemp[], float q[], int dim);
 
-//paths
+//paths ----------------------------------------------------------------------------------
+const static string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
 const static string trainset_dir_path = "/home/chunwei/NetFlixData/trainset_datas.red";
 //python 生成的file列表文件
 const static string trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset_paths.red";
@@ -59,9 +56,13 @@ const static string trainset_file_pathlist = "/home/chunwei/NetFlixData/trainset
 const static string trainset_datas_path = "/home/chunwei/NetFlixData/trainset_datas.red";
 const static string probeset_file_path = "/home/chunwei/NetFlixData/probe.txt";
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//
+//----------------------------------------------------------------------------------------
 //training set data matrix
 //need to initize space later
 static vector < vector<RateRecord> > rateMatrix;
+//qualifying datas 评估数据
+static vector <ProbeRecord> qualis;
 //probe records
 static vector <ProbeRecord> probes;
 

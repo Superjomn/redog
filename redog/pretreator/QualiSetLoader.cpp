@@ -18,7 +18,7 @@ bool QualiSetLoader::load(){
     return true;
 }
 
-bool ProbeLoader::parse(ifstream &file){
+bool QualiSetLoader::parse(ifstream &file){
     int itemid;
     //parse content
     char strtem[256];
@@ -45,6 +45,14 @@ bool ProbeLoader::parse(ifstream &file){
     return true;
 }
 
+void QualiSetLoader::show(){
+    cout<<"show the data:"<<endl;
+    for(uint i=0; i<qualis.size(); ++i)
+    {
+        cout<<"data: "<<i<<" :"<<qualis[i].userid<<" -> "<<qualis[i].itemid<<endl;
+    }
+    cout<<"show over"<<endl;
+}
 
 
 } /* namespace redog */

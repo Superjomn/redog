@@ -21,6 +21,11 @@ Model::Model() {
 }
 
 void Model::iterate(){
+	//init 需要train_set probe_set qualifying_set 的数据
+	//均载入
+	initMean();
+	initPuTemp();
+	initNuNum();
 	//初始第一次升级各个参数
 	update();
 	if(goodEnough()){
@@ -31,6 +36,20 @@ void Model::iterate(){
 	}
 }
 
+void Model::initMean(){
+	unsigned long num = 0;
+	unsigned long sum = 0;
+	for(uint i=0; i<USER_NUM; ++i){
+		for(uint j=0; j<rateMatrix[i].size(); ++j){
+			++num;
+			sum += rateMatrix[i][j].score;
+		}
+	}
+	mean = sum/num;
+}
+
+
+//仅仅是测试精度
 float Model::RMSEProbe(){
 	uint size = probes.size();
 	float rmse = 0.0;
@@ -43,7 +62,18 @@ float Model::RMSEProbe(){
 		rmse += err*err;
 	}
 	rmse = sqrt(rmse / size);
+	cout<<"RMSE:"<<rmse<<" probeNum:"<<size<<endl;
 	return rmse;
+}
+
+void Model::calQualis(){
+	uint size = qualis.size();
+    //对每个记录遍历
+	for(uint i=0; i<size; ++i){
+		//此处文件中的userid 需要进行转化
+		qualis[i].score = predictRate(qualis[i].userid, qualis[i].itemid, K);
+	}
+	cout<<".. predicted qualis size: "<<size<<endl;
 }
 
 float Model::predictRate(int user, int item, int dim)
@@ -69,6 +99,21 @@ void Model::initPuTemp(){
 			}
 			puTemp[u][k] = p[u][k] + sqrt(buNum[u]) * sumy;
 		}
+	}
+}
+
+void Model::initNuNum(){
+	//init nuNum
+	for(uint i=0; i<USER_NUM; ++i){
+		qualis[i] = 0;
+	}
+	//first from qualis
+	for(uint i=0; i<qualis.size(); ++i){
+		++nuNum[qualis[i].userid];
+	}
+	//from rateMatrix
+	for(uint i=0; i<USER_NUM; ++i){
+		nuNum[i] += rateMatrix[i].size();
 	}
 }
 
@@ -104,6 +149,9 @@ void Model::update(){
 				y[itemJ][k] += alpha2 * (sqrt(nuNum[u] * sumQE[k] - beta2*y[itemJ][k]));
 			}
 		}// end update y
+		//计算Qualis 一直保存上一个状态
+		//最终可以写入文件
+		calQualis();
 		//update rmse
 		curRMSE = sqrt(rmse / record_num);
 	}//end user iter
