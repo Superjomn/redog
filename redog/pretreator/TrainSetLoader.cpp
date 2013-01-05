@@ -8,17 +8,14 @@
 #include "TrainSetLoader.h"
 
 namespace redog {
-
-TrainSetLoader::TrainSetLoader(string listpath) {
-	// TODO Auto-generated constructor stub
-	this->listpath = listpath;
-	this->filenum = 0;
+TrainSetLoader::TrainSetLoader(){
+	listpath = trainset_file_pathlist;
+	filenum = 0;
+	darr = NULL;
 }
-
-
 bool TrainSetLoader::load() {
     // load path list file
-	ifstream trainpaths(Common::trainset_file_pathlist.c_str());
+	ifstream trainpaths(trainset_file_pathlist.c_str());
 	if (!trainpaths.is_open()) { cout<<".. can't open train paths list file!"<<endl; return false;}
 	char strtem[256];
 	while(trainpaths.getline(strtem, 256)){
@@ -60,8 +57,7 @@ bool TrainSetLoader::parse(char *path){
     	short record = atoi(parts[1].c_str());
     	assert(userid > 0 && userid <= 2649429);
     	// create new record and push
-    	TrainRecord r;
-    	r = {userid, itemid, record};
+    	TrainRecord r = {userid, itemid, record};
     	this->datas.push_back(r);
     }
     file.close();
@@ -85,7 +81,7 @@ void TrainSetLoader::_sort(){
 bool TrainSetLoader::tofile(){
 	//first sort then write to binary file
 	this->_sort();
-	const char* path = Common::trainset_datas_path.c_str();
+	const char* path = trainset_datas_path.c_str();
 	cout<<".. begin to write data to file : "<<path<<endl;
 	ofstream file;
 	file.open(path, ios::out|ios::binary);
@@ -101,10 +97,10 @@ bool TrainSetLoader::tofile(){
 
 bool TrainSetLoader::fromfile()
 {
-	Common::rateMatrix.resize(USER_NUM);
+	rateMatrix.resize(USER_NUM);
     //open file
-    ifstream file(Common::trainset_datas_path.c_str());
-    if(!file.is_open()){cout<<"can't open file : "<<Common::trainset_datas_path<<endl; return false;}
+    ifstream file(trainset_datas_path.c_str());
+    if(!file.is_open()){cout<<"can't open file : "<<trainset_datas_path<<endl; return false;}
     //clear datas
     this->datas.clear();
     //read binary file to datas
@@ -135,12 +131,12 @@ void TrainSetLoader::showRateMatrix()
 {
     for(long i=0; i<USER_NUM; ++i)
     {
-        if(!Common::rateMatrix[i].empty())
+        if(!rateMatrix[i].empty())
         {
-            cout<<i<<" : "<<Common::rateMatrix[i].size()<<endl;
-            for(int j=0; j<Common::rateMatrix[i].size(); ++j)
+            cout<<i<<" : "<<rateMatrix[i].size()<<endl;
+            for(int j=0; j<rateMatrix[i].size(); ++j)
             {
-                cout<<".. record: "<<Common::rateMatrix[i][j].itemid<<endl;
+                cout<<".. record: "<<rateMatrix[i][j].itemid<<endl;
             }
         }
     }
@@ -157,7 +153,7 @@ void TrainSetLoader::_initRateMatrix(){
             //put temv to rateMatrix
             if(!temv.empty()){
             	//赋值到 rateMatrix
-            	Common::rateMatrix[a_userid].assign(temv.begin(), temv.end());
+            	rateMatrix[a_userid].assign(temv.begin(), temv.end());
             }
     		++a_userid;
     		temv.clear();

@@ -7,7 +7,7 @@
 
 #ifndef DATALOADER_H_
 #define DATALOADER_H_
-
+#include "../common.h"
 namespace redog {
 
 class DataLoader {

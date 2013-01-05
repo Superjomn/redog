@@ -7,13 +7,14 @@
 
 #ifndef CHARACTER_H_
 #define CHARACTER_H_
+#include "../common.h"
 
 namespace redog {
 
 class Character {
 public:
-	virtual void init();
-	virtual void iter();
+	 void init();
+	 void iter();
 };
 
 } /* namespace redog */

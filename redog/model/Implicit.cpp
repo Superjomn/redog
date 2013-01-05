@@ -15,11 +15,7 @@ Implicit::Implicit() {
 }
 
 void Implicit::init(){
-	for(uint i=0; i<ITEM_NUM; ++i){
-		for(uint j=0; j<K; ++j){
-			Common::y[i][j] = 0.0;
-		}
-	}
+	return;
 }
 
 void Implicit::iter(){

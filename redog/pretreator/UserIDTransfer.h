@@ -14,7 +14,6 @@
 #include <fstream>
 #include <assert.h>
 using namespace std;
-
 namespace redog {
 
 class UserIDTransfer {

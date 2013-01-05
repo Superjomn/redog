@@ -9,7 +9,6 @@
 #define PROBELOADER_H_
 
 #include "../common.h"
-
 namespace redog {
 
 class ProbeLoader {

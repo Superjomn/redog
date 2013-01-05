@@ -13,7 +13,7 @@ ProbeLoader::ProbeLoader() {
 }
 
 bool ProbeLoader::load(){
-    ifstream file(Common::probeset_file_path.c_str());
+    ifstream file(probeset_file_path.c_str());
 	if (!file.is_open()) { cout<<".. can't open probe file!"<<endl; return false;}
     //start to parse 
     this->parse(file); 

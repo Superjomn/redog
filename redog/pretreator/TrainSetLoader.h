@@ -25,12 +25,12 @@ private:
 	TrainRecord *darr;
 	int filenum;
 public:
+	TrainSetLoader();
 	bool load();
 	bool fromfile();
 	bool tofile();
 	// compare for sort ; first userid then itemid
 	//bool _compare(const TrainRecord &a, const TrainRecord &b);
-	TrainSetLoader(string listpath="/home/chunwei/NetFlixData/trainset_paths.red");
 	//parse sigle training file
 	bool parse(char *path);
     //sort datas: first userid then itemid

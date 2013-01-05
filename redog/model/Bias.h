@@ -18,6 +18,9 @@ private:
 public:
 	Bias();
 	void init();
+	//初始化商品被打分数目
+	//初始化用户打分数目
+	void _initBiBuNum();
 	void iter();
 	virtual ~Bias();
 };
