@@ -81,6 +81,13 @@ static float y[ITEM_NUM][K] = {1.0};
 //全局平均数
 static float mean = 0.0;
 
+//系数 alpha需要在学习的时候修改学习速率
+const static float looseRate = 0.99;
+static float alpha1 = 0.01;
+static float alpha2 = 0.01;
+const static float beta1 = 0.05;
+const static float beta2 = 0.05;
+
 
 };// end namespace Common
 

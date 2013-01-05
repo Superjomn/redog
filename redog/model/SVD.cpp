@@ -8,12 +8,11 @@
 #include "SVD.h"
 
 namespace redog {
-
+/*
 SVD::SVD() {
 	// TODO Auto-generated constructor stub
 
-}
-
+}*/
 
 void SVD::init(){
 	//仅仅赋值为1
@@ -29,14 +28,6 @@ void SVD::init(){
 			p[i][j] = 0.0;
 		}
 	}
-}
-
-void SVD::iter(){
-
-}
-
-float SVD::_value(int i, int j){
-	return 1.0;
 }
 
 } /* namespace redog */

@@ -21,7 +21,8 @@ private:
 	float puTemp[USER_NUM][K];
 	float preRMSE;
 	float curRMSE;
-	uint NuNum[USER_NUM];
+	uint nuNum[USER_NUM];
+	uint step;
 	//parameters
 	Bias bias;
 	Implicit implicit;
@@ -30,11 +31,14 @@ public:
 	Model();
 	float RMSEProbe();
 	float predictRate(int user, int item, int dim);
-
+	void iterate();
+	bool goodEnough();
+	//更新各个参数
+	void update();
 	void initPuTemp();
 	//implicit
 	void initNuNum();
-	virtual ~Model();
+	//virtual ~Model();
 };
 
 } /* namespace redog */

@@ -9,11 +9,13 @@
 #define PROBELOADER_H_
 
 #include "../common.h"
+#include "UserIDTransfer.h"
 namespace redog {
 
 class ProbeLoader {
 private:
     vector<ProbeRecord> datas;
+    UserIDTransfer uidtranser;
 public:
 	ProbeLoader();
     bool load();

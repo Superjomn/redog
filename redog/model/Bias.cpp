@@ -16,8 +16,6 @@ Bias::Bias() {
 	this->biNum = biNum;
 	this->buNum = buNum;
 	//init buNum biNum
-	//setValue<uint>(biNum, ITEM_NUM, 0);
-	//setValue<uint>(buNum, USER_NUM, 0);
 }
 
 void Bias::init(){

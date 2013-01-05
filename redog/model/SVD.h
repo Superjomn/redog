@@ -15,10 +15,8 @@ namespace redog {
 
 class SVD {
 public:
-	SVD();
+	//SVD();
 	void init();
-	void iter();
-	float _value(int i, int j);
 };
 
 } /* namespace redog */

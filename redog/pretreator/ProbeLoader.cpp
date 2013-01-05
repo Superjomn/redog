@@ -37,6 +37,8 @@ bool ProbeLoader::parse(ifstream &file){
     	}
     	// parse record line
     	int userid = atoi(line.c_str());
+    	// trans file userid to array userid
+    	userid = this->uidtranser.f_to_a(userid);
     	// create new record and push
     	ProbeRecord r;
         //attention!!!!!!!

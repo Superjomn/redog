@@ -32,8 +32,8 @@ void testTrainSetLoader(){
     //tl._sort();
     //tl.show();
     //tl.tofile();
-    tl.fromfile();
-    tl.showRateMatrix();
+    //tl.fromfile();
+    //tl.showRateMatrix();
 }
 
 void testProbeLoader()
