@@ -51,14 +51,14 @@ typedef struct{
 typedef struct{
 	ushort itemid;
 	uint userid;
-    float score;
+    double score;
 } QualiRecord;
 
 template<class Type>
 void setValue(Type arr[], int size, Type v);
 
 
-float dot(float puTemp[], float q[], int dim);
+double dot(double puTemp[], double q[], int dim);
 
 extern const string netflix_dir;
 extern const string test_dir ;
@@ -87,29 +87,29 @@ extern vector <QualiRecord> qualis;
 extern vector <ProbeRecord> probes;
 
 //baseline for user u and item i
-extern float bu[USER_NUM + 1] ;
-extern float bi[ITEM_NUM + 1] ;
+extern double bu[USER_NUM + 1] ;
+extern double bi[ITEM_NUM + 1] ;
 //用户u的评分数
 extern uint buNum[USER_NUM] ;
 //item i 的被评分数
 extern uint biNum[ITEM_NUM] ;
 //非负矩阵分解的两个特征向量 分别对应user item
 //初始化为1
-extern float puTemp[USER_NUM][K];
-extern float p[USER_NUM][K] ;
-extern float q[ITEM_NUM][K] ;
+extern double puTemp[USER_NUM][K];
+extern double p[USER_NUM][K] ;
+extern double q[ITEM_NUM][K] ;
 extern uint nuNum[USER_NUM];
 //隐含模型 y
-extern float y[ITEM_NUM][K];
+extern double y[ITEM_NUM][K];
 //全局平均数
-extern float mean ;
+extern double mean ;
 
 //系数 alpha需要在学习的时候修改学习速率
-extern const float looseRate ;
-extern const float alpha1 ;
-extern const float alpha2 ;
-extern const float beta1 ;
-extern const float beta2 ;
+extern const double looseRate ;
+extern const double alpha1 ;
+extern const double alpha2 ;
+extern const double beta1 ;
+extern const double beta2 ;
 
 
 };// end namespace Common
