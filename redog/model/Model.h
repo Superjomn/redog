@@ -28,6 +28,8 @@ private:
 
 public:
 	Model();
+    //test complete
+    void run();
 	float RMSEProbe();
 	float predictRate(int user, int item, int dim);
 	//main function
