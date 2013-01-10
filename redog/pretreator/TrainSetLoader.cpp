@@ -42,7 +42,7 @@ bool TrainSetLoader::parse(char *path){
     		itemid = atoi(line.substr(0, pos).c_str());
     		assert(itemid != 0);
     		++ this->filenum;
-    		if(this->filenum % 500 )//== 0)
+    		if(this->filenum % 500 == 0 )//== 0)
     		{
     			cout<<".. parsed "<<this->filenum<<" files!"<<endl;
     			cout<<".. datas size:"<<this->datas.size()<<endl;
@@ -136,7 +136,7 @@ void TrainSetLoader::showRateMatrix()
             cout<<i<<" : "<<rateMatrix[i].size()<<endl;
             for(int j=0; j<rateMatrix[i].size(); ++j)
             {
-                cout<<".. record: "<<rateMatrix[i][j].itemid<<endl;
+                cout<<".. record: "<<i<<" "<<rateMatrix[i][j].itemid<<"->"<<int(rateMatrix[i][j].score)<<endl;
             }
         }
     }

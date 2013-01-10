@@ -10,8 +10,9 @@
 namespace redog {
 
 bool QualiSetLoader::load(){
+    //string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
     ifstream file(qualify_data_path.c_str());
-    if (!file.is_open()) { cout<<".. can't open probe file!"<<endl; return false;}
+    if (!file.is_open()) { cout<<".. can't open probe file! path:"<<qualify_data_path<<endl; return false;}
     //start to parse 
     this->parse(file); 
     file.close();
@@ -36,7 +37,7 @@ bool QualiSetLoader::parse(ifstream &file){
     	// trans file userid to array userid
     	userid = this->uidtranser.f_to_a(userid);
     	// create new record and push
-    	ProbeRecord r;
+    	QualiRecord r;
         //attention!!!!!!!
     	r = {itemid, userid, 0};
         //add to common dataset

@@ -14,7 +14,7 @@ ProbeLoader::ProbeLoader() {
 
 bool ProbeLoader::load(){
     ifstream file(probeset_file_path.c_str());
-	if (!file.is_open()) { cout<<".. can't open probe file!"<<endl; return false;}
+	if (!file.is_open()) { cout<<".. can't open probe file! "<<probeset_file_path<<endl; return false;}
     //start to parse 
     this->parse(file); 
     file.close();
@@ -51,7 +51,7 @@ bool ProbeLoader::parse(ifstream &file){
 void ProbeLoader::initProbeScores(){
 	cout<<"init Probes Scores"<<endl;
 	ProbeRecord *cur;
-	TrainRecord *currate;
+	RateRecord *currate;
 	for(uint i=0; i<probes.size(); ++i){
 		cur = &probes[i];
 		//find this item

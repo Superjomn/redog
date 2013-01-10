@@ -33,8 +33,8 @@ void testTrainSetLoader(){
     //tl._sort();
     //tl.show();
     //tl.tofile();
-    //tl.fromfile();
-    //tl.showRateMatrix();
+    tl.fromfile();
+    tl.showRateMatrix();
 }
 
 void testProbeLoader()
@@ -56,9 +56,9 @@ int main(){
 
 	cout<<"hello"<<endl;
 	//testUserIDTransfer();
-	//testTrainSetLoader();
+	testTrainSetLoader();
     //testProbeLoader();
-    testQualiSetLoader();
+    //testQualiSetLoader();
 	return 0;
 }
 
