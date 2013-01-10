@@ -32,18 +32,18 @@ vector <QualiRecord> qualis;
  vector <ProbeRecord> probes;
 
 //baseline for user u and item i
-float bu[USER_NUM + 1] = {0};
-float bi[ITEM_NUM + 1] = {0};
+float bu[USER_NUM + 1] = {0.0};
+float bi[ITEM_NUM + 1] = {0.0};
 //用户u的评分数
 uint buNum[USER_NUM] = {0};
 //item i 的被评分数
 uint biNum[ITEM_NUM] = {0};
 //非负矩阵分解的两个特征向量 分别对应user item
 //初始化为1
-float p[USER_NUM][K] = {1.0};
-float q[ITEM_NUM][K] = {1.0};
+float p[USER_NUM][K] = {0.5};
+float q[ITEM_NUM][K] = {0.5};
 //隐含模型 y
-float y[ITEM_NUM][K] = {1.0};
+float y[ITEM_NUM][K] = {0.5};
 //tem 
 float puTemp[USER_NUM][K] = {0.0};
 uint nuNum[USER_NUM] = {0};

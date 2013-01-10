@@ -15,10 +15,10 @@
 #include <assert.h>
 
 //item from 1 to 17770
-#define ITEM_NUM 17771
+#define ITEM_NUM 17770
 #define USER_NUM 480189
 #define MAX_STEP 60
-#define K 100
+#define K 30
 using namespace std;
 
 namespace redog{

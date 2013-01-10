@@ -19,12 +19,29 @@ Model::Model() {
 	bias.init();
 	implicit.init();
 	svd.init();
+    for(int u=0; u<USER_NUM; ++u)
+    {
+        for(int k=0; k<K; ++k)
+        {
+            p[u][k] = 0.5;
+        }
+    }
+
+    for(int i=0; i<ITEM_NUM; ++i)
+    {
+        for(int k=0; k<K; ++k)
+        {
+            q[i][k] = 0.5;
+            y[i][k] = 0.5;
+        }
+    }
     cout<<"model init OK!"<<endl;
 }
 
 void Model::iterate(){
 	//init 需要train_set probe_set qualifying_set 的数据
 	//均载入
+    cout<<"begin iterate .."<<endl;
 	initMean();
 	initNuNum();
 	//初始第一次升级各个参数
@@ -35,7 +52,7 @@ void Model::iterate(){
         if(step == MAX_STEP){
             cout<<" .. succeed end"<<endl;
             //将上次最佳状态的数据写入文件
-            qualisToFile();
+            //qualisToFile();
         }else{
             cout<<"------------------------------"<<endl;
             cout<<".. iterate step: "<<step<<endl;
@@ -44,37 +61,67 @@ void Model::iterate(){
 	}
 }
 
+void showStatus(string status, uint userNum, int step){
+    if(userNum % 5000 == 0){
+        cout<<status<<" "<<userNum<<"  step:"<<step<<endl;
+        float status = userNum / USER_NUM;
+        cout<<"   status: "<<status<<endl;
+    }
+}
+
 void Model::update(){
     //just one step
     cout<<"updating .."<<endl;
 	initPuTemp();
-	float rmse = 0.0;
+	double rmse = 0.0;
 	unsigned long record_num = 0;
+    cout<<"update, step: "<<step<<endl;
 	for(uint u=0; u<USER_NUM; ++u){
 		float sumQE[K] = {0.0};
 		uint isize = rateMatrix[u].size();
+        //console
+        //showStatus("cal and update", u, step); 
+        
+        //console
 		for(uint i=0; i<isize; ++i){
 			++record_num;
 			//update every parameter
 			uint itemI = rateMatrix[u][i].itemid;
 			float pui = predictRate(u, itemI, K);
 			float eui = rateMatrix[u][i].score - pui;
+            //cout<<"pui\teui"<<endl;
+            //cout<<pui<<"\t"<<eui<<endl;
+
+            assert(!isnan(pui) && !isnan(eui));
 			rmse += eui * eui;
+            //cout<<"rmse: "<<rmse<<endl;
+            assert(!isnan(rmse));
 			//update bu bi
 			bu[u] += alpha1 * (eui - beta1 * bu[u]);
-			bi[itemI] += alpha1 * (eui - beta1 * bi[itemI]);
+            assert(!isnan(bu[u]));
+			bi[itemI] += alpha1 * (eui - beta1 * bi[itemI-1]);
+            assert(!isnan(bi[itemI]));
 			//update p q
 			for(uint k=0; k<K; ++k){
 				p[u][k] += alpha2 * (eui * q[itemI][k] - beta2 * p[u][k]);
-				q[itemI][k] += alpha2 * (eui * puTemp[u][k] - beta2 * q[itemI][k]);
+                assert(!isnan(p[u][k]) && p[u][k] != 0);
+				q[itemI][k] += alpha2 * (eui * puTemp[u][k] - beta2 * q[itemI-1][k]);
+                assert(!isnan(q[itemI][k]) && q[itemI][k] != 0);
 				sumQE[k] += eui * q[itemI][k];
+                assert(!isnan(sumQE[k]) && sumQE[k] != 0.0);
 			}
 		}// end item iter
 		//update implicit parameter y
 		for(uint j=0; j < nuNum[u]; ++j){
 			int itemJ = rateMatrix[u][j].itemid;
 			for(uint k=0; k<K; ++k){
-				y[itemJ][k] += alpha2 * (sqrt(nuNum[u] * sumQE[k] - beta2*y[itemJ][k]));
+                float test = nuNum[u] * sumQE[k] - beta2*y[itemJ-1][k];
+                /*
+                 * nuNum sumQE = 0
+                 */
+                assert(!isnan(test) && test != 0.0);
+				y[itemJ][k] += alpha2 * (sqrt(nuNum[u] * sumQE[k] - beta2*y[itemJ-1][k]));
+                assert(!isnan(y[itemJ][k]));
 			}
 		}// end update y
 		//计算Qualis 一直保存上一个状态
@@ -82,9 +129,11 @@ void Model::update(){
 	}//end user iter
     //calQualis();
     //update rmse
-    //curRMSE = sqrt(rmse / record_num);
-    curRMSE = RMSEProbe();
-    cout<<"curRMSE: "<<curRMSE<<endl;
+    assert(record_num != 0);
+    curRMSE = sqrt(rmse / record_num);
+    assert(!isnan(curRMSE));
+    //curRMSE = RMSEProbe();
+    cout<<"curRMSE: "<<rmse<< " " <<curRMSE<<endl;
 }//end update
 
 
@@ -130,7 +179,6 @@ void Model::calQualis(){
 		qualis[i].score = predictRate(qualis[i].userid, qualis[i].itemid, K);
 	}
     cout<<"end qualis .."<<endl;
-	//cout<<".. predicted qualis size: "<<size<<endl;
 }
 
 float Model::predictRate(int user, int item, int dim)
@@ -152,6 +200,8 @@ void Model::initPuTemp(){
     float sqrtRuNum = 0.0;
 
 	for(uint u=0; u<USER_NUM; ++u){
+        //console
+        //showStatus("init puTemp", u, step); 
         int ruNum = rateMatrix[u].size();
         if (ruNum>1) sqrtRuNum = 1.0/sqrt(ruNum);
         assert(sqrtRuNum >= 0.0);
@@ -159,10 +209,13 @@ void Model::initPuTemp(){
             float sumy = 0.0;
 			for(uint i=0; i<ruNum; ++i){
 				int itemI = rateMatrix[u][i].itemid;
+                if(y[itemI][k] == 0) y[itemI][k] = 0.5;
                 assert(1<=itemI && 17770>= itemI);
+                assert(y[itemI][k] != 0 && !isnan(y[itemI][k]));
 				sumy += y[itemI][k];
 			}
 			puTemp[u][k] = p[u][k] + sqrtRuNum * sumy;
+            assert(puTemp[u][k] != 0);
 		}
 	}
     cout<<"end initPuTemp .."<<endl;
