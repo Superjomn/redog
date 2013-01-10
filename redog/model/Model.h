@@ -18,8 +18,8 @@ namespace redog {
 class Model {
 private:
 	//putem = pu + sqrt(Nu) * \sum{y_i)
-	float preRMSE;
-	float curRMSE;
+	double preRMSE;
+	double curRMSE;
 	uint step;
 	//parameters
 	Bias bias;
@@ -30,8 +30,8 @@ public:
 	Model();
     //test complete
     void run();
-	float RMSEProbe();
-	float predictRate(int user, int item, int dim);
+	double RMSEProbe();
+	double predictRate(int user, int item, int dim);
 	//main function
 	void iterate();
 	bool goodEnough();
@@ -43,7 +43,7 @@ public:
 	void initMean();
 	//预测qualis的score 并写入中央公共数据集
 	//之后可以写入文件
-	float sumNuY(uint u, ushort k);
+	double sumNuY(uint u, ushort k);
 	void calQualis();
     //将qualis写入文件 最好写一个专门的类
     bool qualisToFile();

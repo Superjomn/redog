@@ -14,7 +14,7 @@ Model::Model() {
 	preRMSE = 100000;
 	curRMSE = 0.0;
 	step = 0;
-	//setValue<float>(puTemp, USER_NUM, K, 0.0);
+	//setValue<double>(puTemp, USER_NUM, K, 0.0);
 	//init characters
 	bias.init();
 	implicit.init();
@@ -66,7 +66,7 @@ void Model::iterate(){
 void showStatus(string status, uint userNum, int step){
     if(userNum % 5000 == 0){
         cout<<status<<" "<<userNum<<"  step:"<<step<<endl;
-        float status = float(userNum) / USER_NUM;
+        double status = double(userNum) / USER_NUM;
         cout<<"   status: "<<status<<endl;
     }
 }
@@ -96,16 +96,16 @@ void Model::update(){
                 ++usernum;
                 if(usernum % 5000 == 0)
                 {
-                    printf("step:%d  status: %f", step, float(usernum)/USER_NUM);
+                    printf("step:%d  status: %f", step, double(usernum)/USER_NUM);
                 }
     			//遍历user's item
     			for(uint i=0; i<rateMatrix[u].size(); ++i){
                     cout<<"i: "<<i<<endl;
     				curnode = &rateMatrix[u][i];
     				uint itemID = curnode->itemid - 1;
-    				float invSqrtNuNum = 1 / sqrt(float(nuNum[u]));
+    				double invSqrtNuNum = 1 / sqrt(double(nuNum[u]));
                     assert(!isnan(invSqrtNuNum) && invSqrtNuNum > 0.0);
-    				float eui = predictRate(u, itemID, K) - rateMatrix[u][i].score;
+    				double eui = predictRate(u, itemID, K) - rateMatrix[u][i].score;
     				/* score=0 则为 qualifying 附加在
     				 * 后面的记录， 需要跳过
     				 */
@@ -128,7 +128,7 @@ void Model::update(){
                         {
                         	cout<<"dealing with q:"<<endl;
                             //update qi
-                        	float sumnuy = sumNuY(u, k);
+                        	double sumnuy = sumNuY(u, k);
                         	cout<<"eui p[u][k] invSqrtNuNum sumNuY q[itemID][k]"<<endl;
                             cout<<eui<<" "<<p[u][k]<<" "<<invSqrtNuNum<<" "<<sumnuy<<" "<<q[itemID][k]<<endl;
                             q[itemID][k] += alpha2 * (eui *(p[u][k] + invSqrtNuNum * sumNuY(u, k))) - beta2 * q[itemID][k];
@@ -158,13 +158,15 @@ void Model::update(){
                     cout<<"updating y"<<endl;
     				for(ushort k=0; k<K; ++k)
     				{
-                        printf("y itemID k: %f %d %hd\n", y, itemID, k);
+                        printf("y itemID k: %f %d %hd\n", y[itemID][k], itemID, k);
                         assert(y[itemID][k] != 0);
                         printf("itemID\rk\ralpha2\reui\rinvSqrtNuNum\rq[itemID][k]\rbeta2\ry[itemID][k]\n");
                         printf("%d\r%hd\r%f\r%f\r%f\r%f\r%f\r%f\n", itemID, k, alpha2, eui, invSqrtNuNum, q[itemID][k], beta2, y[itemID][k]);
-    					y[itemID][k] += alpha2 * (eui * invSqrtNuNum * q[itemID][k] - beta2 * y[itemID][k]);
+                        double rest = alpha2 * (eui * invSqrtNuNum * q[itemID][k] - beta2 * y[itemID][k]);
+                        cout<<"rest: "<<rest<<endl;
+    					y[itemID][k] =  y[itemID][k] + rest ;
                         assert(y[itemID][k] != 0.0);
-                        printf("y itemID k: %f %d %hd\n", y, itemID, k);
+                        printf("y itemID k: %lf %d %hd\n", y[itemID][k], itemID, k);
     				}
     			}//end for item
                 cout<<"end item "<<endl;
@@ -179,8 +181,8 @@ void Model::update(){
     cout<<"step: "<<step<<" RMSE "<<curRMSE<<endl;
 }//end update
 
-float Model::sumNuY(uint u, ushort k){
-	float sum = 0.0;
+double Model::sumNuY(uint u, ushort k){
+	double sum = 0.0;
 	for(uint i=0; i< nuNum[u]; ++i){
 		uint itemID = rateMatrix[u][i].itemid - 1;
 		sum += y[itemID][k];
@@ -199,17 +201,17 @@ void Model::initMean(){
 			sum += rateMatrix[i][j].score;
 		}
 	}
-	mean = sum/float(num);
+	mean = sum/double(num);
 	cout<<".. mean: "<<mean<<endl;
 }
 
 
 //仅仅是测试精度
-float Model::RMSEProbe(){
+double Model::RMSEProbe(){
 	uint size = probes.size();
-	float rmse = 0.0;
-	float prate = 0.0;
-	float err = 0.0;
+	double rmse = 0.0;
+	double prate = 0.0;
+	double err = 0.0;
 	for(uint i=0; i<size; ++i){
 		//此处文件中的userid 需要进行转化
 		prate = predictRate(probes[i].userid, probes[i].itemid-1, K);
@@ -233,12 +235,12 @@ void Model::calQualis(){
     cout<<"end qualis .."<<endl;
 }
 
-float Model::predictRate(int u, int itemID, int dim)
+double Model::predictRate(int u, int itemID, int dim)
 {
     assert(0<=itemID && 17770> itemID);
-    float invSqrtNuNum = 1 / sqrt(float(nuNum[u]));
-    float puTem[K];
-    float sumY;
+    double invSqrtNuNum = 1 / sqrt(double(nuNum[u]));
+    double puTem[K];
+    double sumY;
     for(ushort k=0; k<K; ++k){
         sumY = sumNuY(u, k);
     	puTem[k] = invSqrtNuNum * sumY;
