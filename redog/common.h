@@ -14,8 +14,10 @@
 #include <math.h>
 #include <assert.h>
 
-#define ITEM_NUM 17770
+//item from 1 to 17770
+#define ITEM_NUM 17771
 #define USER_NUM 480189
+#define MAX_STEP 60
 #define K 100
 using namespace std;
 
@@ -94,7 +96,7 @@ extern float p[USER_NUM][K] ;
 extern float q[ITEM_NUM][K] ;
 extern uint nuNum[USER_NUM];
 //隐含模型 y
-extern float y[ITEM_NUM][K] ;
+extern float y[ITEM_NUM][K];
 //全局平均数
 extern float mean ;
 

@@ -8,5 +8,9 @@ Debug/*
 *.log
 *.pyx
 *.db
+hell
+*.tar
+*.png
+*.pyc
 redog/Debug
 
