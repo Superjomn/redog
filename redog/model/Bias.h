@@ -12,9 +12,6 @@
 namespace redog {
 
 class Bias {
-private:
-	float *bu, *bi;
-	unsigned int *buNum, *biNum;
 public:
 	Bias();
 	void init();

@@ -89,8 +89,10 @@ extern uint buNum[USER_NUM] ;
 extern uint biNum[ITEM_NUM] ;
 //非负矩阵分解的两个特征向量 分别对应user item
 //初始化为1
+extern float puTemp[USER_NUM][K];
 extern float p[USER_NUM][K] ;
 extern float q[ITEM_NUM][K] ;
+extern uint nuNum[USER_NUM];
 //隐含模型 y
 extern float y[ITEM_NUM][K] ;
 //全局平均数

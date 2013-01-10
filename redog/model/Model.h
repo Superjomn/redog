@@ -18,10 +18,8 @@ namespace redog {
 class Model {
 private:
 	//putem = pu + sqrt(Nu) * \sum{y_i)
-	float puTemp[USER_NUM][K];
 	float preRMSE;
 	float curRMSE;
-	uint nuNum[USER_NUM];
 	uint step;
 	//parameters
 	Bias bias;

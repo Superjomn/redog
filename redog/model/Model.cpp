@@ -10,6 +10,7 @@
 namespace redog {
 
 Model::Model() {
+    cout<<"begin model .."<<endl;
 	preRMSE = 100000;
 	curRMSE = 0.0;
 	step = 0;
@@ -18,14 +19,15 @@ Model::Model() {
 	bias.init();
 	implicit.init();
 	svd.init();
+    cout<<"model init OK!"<<endl;
 }
 
 void Model::iterate(){
 	//init 需要train_set probe_set qualifying_set 的数据
 	//均载入
 	initMean();
-	initPuTemp();
-	initNuNum();
+	//initPuTemp();
+	//initNuNum();
 	//初始第一次升级各个参数
 	update();
 	if(goodEnough()){
@@ -33,12 +35,14 @@ void Model::iterate(){
         //将上次最佳状态的数据写入文件
         qualisToFile();
 	}else{
-		cout<<".. run step: "<<step<<endl;
+        cout<<"------------------------------"<<endl;
+		cout<<".. iterate step: "<<step<<endl;
 		update();
 	}
 }
 
 void Model::initMean(){
+    cout<<"init mean .."<<endl;
 	unsigned long num = 0;
 	unsigned long sum = 0;
 	for(uint i=0; i<USER_NUM; ++i){
@@ -70,13 +74,14 @@ float Model::RMSEProbe(){
 }
 
 void Model::calQualis(){
+    cout<<"cal qualis .."<<endl;
 	uint size = qualis.size();
     //对每个记录遍历
 	for(uint i=0; i<size; ++i){
 		//此处文件中的userid 需要进行转化
 		qualis[i].score = predictRate(qualis[i].userid, qualis[i].itemid, K);
 	}
-	cout<<".. predicted qualis size: "<<size<<endl;
+	//cout<<".. predicted qualis size: "<<size<<endl;
 }
 
 float Model::predictRate(int user, int item, int dim)
@@ -92,6 +97,7 @@ float Model::predictRate(int user, int item, int dim)
     return ret;
 }
 
+/*
 void Model::initPuTemp(){
 	float sumy = 0.0;
 	for(uint u=0; u<USER_NUM; ++u){
@@ -119,9 +125,11 @@ void Model::initNuNum(){
 		nuNum[i] += rateMatrix[i].size();
 	}
 }
+*/
 
 void Model::update(){
 	//inc step
+    cout<<"updating .."<<endl;
 	++step;
 	float rmse = 0.0;
 	unsigned long record_num = 0;
@@ -157,6 +165,7 @@ void Model::update(){
 		calQualis();
 		//update rmse
 		curRMSE = sqrt(rmse / record_num);
+        cout<<"curRMSE: "<<curRMSE<<endl;
 	}//end user iter
 }
 

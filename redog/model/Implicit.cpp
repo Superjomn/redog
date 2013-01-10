@@ -10,7 +10,7 @@
 namespace redog {
 
 Implicit::Implicit() {
-	// TODO Auto-generated constructor stub
+    cout<<"init implicit .."<<endl;
 
 }
 

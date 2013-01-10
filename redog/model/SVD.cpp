@@ -8,13 +8,8 @@
 #include "SVD.h"
 
 namespace redog {
-/*
-SVD::SVD() {
-	// TODO Auto-generated constructor stub
-
-}*/
-
 void SVD::init(){
+    cout<<"init SVD .."<<endl;
 	return;
 }
 

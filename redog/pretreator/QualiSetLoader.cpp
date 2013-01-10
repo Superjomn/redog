@@ -10,6 +10,7 @@
 namespace redog {
 
 bool QualiSetLoader::load(){
+    cout<<"load qualifying data and trans userid .."<<endl;
     //string qualify_data_path = "/home/chunwei/NetFlixData/qualifying.txt";
     ifstream file(qualify_data_path.c_str());
     if (!file.is_open()) { cout<<".. can't open probe file! path:"<<qualify_data_path<<endl; return false;}

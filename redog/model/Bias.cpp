@@ -10,12 +10,7 @@
 namespace redog {
 
 Bias::Bias() {
-	// TODO Auto-generated constructor stub
-	this->bu = bu;
-	this->bi = bi;
-	this->biNum = biNum;
-	this->buNum = buNum;
-	//init buNum biNum
+    cout<<"init bias .."<<endl;
 }
 
 void Bias::init(){

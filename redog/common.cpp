@@ -44,6 +44,9 @@ float p[USER_NUM][K] = {1.0};
 float q[ITEM_NUM][K] = {1.0};
 //隐含模型 y
 float y[ITEM_NUM][K] = {1.0};
+//tem 
+float puTemp[USER_NUM][K] = {0.0};
+uint nuNum[USER_NUM] = {0};
 //全局平均数
 float mean = 0.0;
 

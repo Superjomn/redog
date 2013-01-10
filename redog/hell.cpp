@@ -10,6 +10,7 @@
 #include "pretreator/TrainSetLoader.h"
 #include "pretreator/ProbeLoader.h"
 #include "pretreator/QualiSetLoader.h"
+#include "model/Model.h"
 using namespace std;
 using namespace redog;
 
@@ -51,14 +52,29 @@ void testQualiSetLoader()
     qs.show();
 }
 
+void run()
+{
+    // ------- load data from file
+    TrainSetLoader tl;
+    ProbeLoader pl;
+    QualiSetLoader qs;
+    tl.fromfile();
+    pl.load();
+    qs.load();
+    // ------- model ----------
+    Model model;
+    model.iterate();
+}
+
 
 int main(){
 
 	cout<<"hello"<<endl;
 	//testUserIDTransfer();
-	testTrainSetLoader();
+	//testTrainSetLoader();
     //testProbeLoader();
     //testQualiSetLoader();
+    run();
 	return 0;
 }
 

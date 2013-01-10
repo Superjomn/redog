@@ -10,6 +10,7 @@
 namespace redog {
 
 ProbeLoader::ProbeLoader() {
+    cout<<"load probe data and trans userid .."<<endl;
 }
 
 bool ProbeLoader::load(){
