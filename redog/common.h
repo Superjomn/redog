@@ -74,10 +74,14 @@ extern string probeset_file_path ;
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //
 //----------------------------------------------------------------------------------------
-//training set data matrix
-//need to initize space later
+/* training set data matrix
+ * need to initize space later
+ * contain data from training_set and qualifying
+ * if score=0 then it's the qualifying node
+ */
 extern vector < vector<RateRecord> > rateMatrix;
 //qualifying datas 评估数据
+//for qualfying result to file
 extern vector <QualiRecord> qualis;
 //probe records
 extern vector <ProbeRecord> probes;

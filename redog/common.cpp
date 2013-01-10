@@ -43,7 +43,7 @@ uint biNum[ITEM_NUM] = {0};
 float p[USER_NUM][K] = {0.5};
 float q[ITEM_NUM][K] = {0.5};
 //隐含模型 y
-float y[ITEM_NUM][K] = {0.5};
+float y[ITEM_NUM][K] = {1.0};
 //tem 
 float puTemp[USER_NUM][K] = {0.0};
 uint nuNum[USER_NUM] = {0};
@@ -52,10 +52,10 @@ float mean = 0.0;
 
 //系数 alpha需要在学习的时候修改学习速率
 const float looseRate = 0.99;
-const float alpha1 = 0.01;
-const float alpha2 = 0.01;
-const float beta1 = 0.05;
-const float beta2 = 0.05;
+const float alpha1 = 0.007;
+const float alpha2 = 0.007;
+const float beta1 = 0.005;
+const float beta2 = 0.015;
 
 
 
