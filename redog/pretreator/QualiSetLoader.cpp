@@ -43,6 +43,11 @@ bool QualiSetLoader::parse(ifstream &file){
     	r = {itemid, userid, 0};
         //add to common dataset
     	qualis.push_back(r);
+    	//add to rateMatrix
+    	//加入到 rateMatrix
+    	//认为 score=0 的记录为qualifying的记录
+    	RateRecord rr = {itemid, 0};
+    	rateMatrix[userid].push_back(rr);
     }
     return true;
 }

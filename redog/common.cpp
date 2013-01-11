@@ -32,30 +32,30 @@ vector <QualiRecord> qualis;
  vector <ProbeRecord> probes;
 
 //baseline for user u and item i
-float bu[USER_NUM + 1] = {0.0};
-float bi[ITEM_NUM + 1] = {0.0};
+double bu[USER_NUM + 1] = {0.0};
+double bi[ITEM_NUM + 1] = {0.0};
 //用户u的评分数
 uint buNum[USER_NUM] = {0};
 //item i 的被评分数
 uint biNum[ITEM_NUM] = {0};
 //非负矩阵分解的两个特征向量 分别对应user item
 //初始化为1
-float p[USER_NUM][K] = {0.5};
-float q[ITEM_NUM][K] = {0.5};
+double p[USER_NUM][K] = {0.5};
+double q[ITEM_NUM][K] = {0.5};
 //隐含模型 y
-float y[ITEM_NUM][K] = {0.5};
+double y[ITEM_NUM][K] = {1.0};
 //tem 
-float puTemp[USER_NUM][K] = {0.0};
+double puTemp[USER_NUM][K] = {0.0};
 uint nuNum[USER_NUM] = {0};
 //全局平均数
-float mean = 0.0;
+double mean = 0.0;
 
 //系数 alpha需要在学习的时候修改学习速率
-const float looseRate = 0.99;
-const float alpha1 = 0.01;
-const float alpha2 = 0.01;
-const float beta1 = 0.05;
-const float beta2 = 0.05;
+const double looseRate = 0.99;
+const double alpha1 = 0.007;
+const double alpha2 = 0.007;
+const double beta1 = 0.005;
+const double beta2 = 0.015;
 
 
 
@@ -67,8 +67,8 @@ void setValue(Type arr[], int size, Type v){
 	}
 }
 
-float dot(float puTemp[], float q[], int dim){
-	float res = 0.0;
+double dot(double puTemp[], double q[], int dim){
+	double res = 0.0;
 	for(uint i=0; i<dim; ++i){
 		res += puTemp[i] * q[i];
 	}
