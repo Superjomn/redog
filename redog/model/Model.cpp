@@ -87,20 +87,21 @@ void Model::update(){
     RateRecord *curnode;
     for (uint rem = remain; _step<10; rem = (rem+1)%10, ++_step){
     	++ _step;
-        cout<<"rem: "<<rem<<endl;
-    	cout<<"stage: "<<_step<<endl;
+       // cout<<"rem: "<<rem<<endl;
+    //	cout<<"stage: "<<_step<<endl;
     	//分批遍历user
     	for(uint u=0; u<USER_NUM; ++u){
     		if(u % 10 == rem){
-                cout<<"u: "<<u<<endl;
+               // cout<<"u: "<<u<<endl;
                 ++usernum;
+                cout<<"usernum >> "<<usernum<<endl;
                 if(usernum % 5000 == 0)
                 {
                     printf("step:%d  status: %f", step, double(usernum)/USER_NUM);
                 }
     			//遍历user's item
     			for(uint i=0; i<rateMatrix[u].size(); ++i){
-                    cout<<"i: "<<i<<endl;
+                   // cout<<"i: "<<i<<endl;
     				curnode = &rateMatrix[u][i];
     				uint itemID = curnode->itemid - 1;
     				double invSqrtNuNum = 1 / sqrt(double(nuNum[u]));
@@ -110,7 +111,7 @@ void Model::update(){
     				 * 后面的记录， 需要跳过
     				 */
     				if(curnode->score != 0){
-                        cout<<"updating bu bi q p"<<endl;
+                       // cout<<"updating bu bi q p"<<endl;
     					++ record_num;
     					//顺便计算 rmse
     					rmse += eui * eui;
@@ -123,20 +124,20 @@ void Model::update(){
                         //update bi
                         bi[itemID] += alpha1 * (eui - beta1 * bi[itemID]);
                         assert(!isnan(bi[itemID]));
-                        cout<<"update q p"<<endl;
+                       // cout<<"update q p"<<endl;
                         for(ushort k=0; k<K; ++k)
                         {
-                        	cout<<"dealing with q:"<<endl;
+                        //	cout<<"dealing with q:"<<endl;
                             //update qi
                         	double sumnuy = sumNuY(u, k);
-                        	cout<<"eui p[u][k] invSqrtNuNum sumNuY q[itemID][k]"<<endl;
-                            cout<<eui<<" "<<p[u][k]<<" "<<invSqrtNuNum<<" "<<sumnuy<<" "<<q[itemID][k]<<endl;
+                        //	cout<<"eui p[u][k] invSqrtNuNum sumNuY q[itemID][k]"<<endl;
+                           // cout<<eui<<" "<<p[u][k]<<" "<<invSqrtNuNum<<" "<<sumnuy<<" "<<q[itemID][k]<<endl;
                             q[itemID][k] += alpha2 * (eui *(p[u][k] + invSqrtNuNum * sumNuY(u, k))) - beta2 * q[itemID][k];
-                            cout<<q[itemID][k]<<endl;
+                           // cout<<q[itemID][k]<<endl;
                             //upate pu
-                            cout<<"dealing with p:"<<endl;
-                            p[u][k] += p[u][k] + alpha2 * (eui * q[itemID][k] - beta2 * p[u][k]);
-                            cout<<p[u][k]<<endl;
+                           // cout<<"dealing with p:"<<endl;
+                            p[u][k] += alpha2 * (eui * q[itemID][k] - beta2 * p[u][k]);
+                           // cout<<p[u][k]<<endl;
                             assert(!isnan(q[itemID][k]) && q[itemID][k] != 1/0.0);
                             if(isnan(q[itemID][k]))
                             {
@@ -155,23 +156,23 @@ void Model::update(){
     				}
     				// for j in N(u)
     				//update y
-                    cout<<"updating y"<<endl;
+                   // cout<<"updating y"<<endl;
     				for(ushort k=0; k<K; ++k)
     				{
-                        printf("y itemID k: %f %d %hd\n", y[itemID][k], itemID, k);
+                       // printf("y itemID k: %f %d %hd\n", y[itemID][k], itemID, k);
                         assert(y[itemID][k] != 0);
-                        printf("itemID\rk\ralpha2\reui\rinvSqrtNuNum\rq[itemID][k]\rbeta2\ry[itemID][k]\n");
-                        printf("%d\r%hd\r%f\r%f\r%f\r%f\r%f\r%f\n", itemID, k, alpha2, eui, invSqrtNuNum, q[itemID][k], beta2, y[itemID][k]);
+                       // printf("itemID\rk\ralpha2\reui\rinvSqrtNuNum\rq[itemID][k]\rbeta2\ry[itemID][k]\n");
+                       // printf("%d\r%hd\r%f\r%f\r%f\r%f\r%f\r%f\n", itemID, k, alpha2, eui, invSqrtNuNum, q[itemID][k], beta2, y[itemID][k]);
                         double rest = alpha2 * (eui * invSqrtNuNum * q[itemID][k] - beta2 * y[itemID][k]);
-                        cout<<"rest: "<<rest<<endl;
+                       // cout<<"rest: "<<rest<<endl;
     					y[itemID][k] =  y[itemID][k] + rest ;
                         assert(y[itemID][k] != 0.0);
-                        printf("y itemID k: %lf %d %hd\n", y[itemID][k], itemID, k);
+                       // printf("y itemID k: %lf %d %hd\n", y[itemID][k], itemID, k);
     				}
     			}//end for item
-                cout<<"end item "<<endl;
+                //cout<<"end item "<<endl;
     		}//end if u % 10
-            cout<<"end user interation"<<endl;
+            //cout<<"end user interation"<<endl;
     	}//end for u
     }//end rem
     rmse /= record_num;
@@ -187,7 +188,7 @@ double Model::sumNuY(uint u, ushort k){
 		uint itemID = rateMatrix[u][i].itemid - 1;
 		sum += y[itemID][k];
 	}
-	cout<<"get sum: "<<sum<<endl;
+	//cout<<"get sum: "<<sum<<endl;
 	return sum;
 }
 
@@ -247,7 +248,7 @@ double Model::predictRate(int u, int itemID, int dim)
     }
     double ret;
     if(nuNum[u] >= 1){
-    	ret = mean + bu[u] + bi[itemID] + dot(puTem, q[itemID], K);
+    	ret = mean + bu[u] + bi[itemID] + dot((double *)puTem, (double*)q[itemID], K);
     }
     else ret  = mean + bu[u] + bi[itemID];
     if(ret < 1.0) ret = 1.0;
