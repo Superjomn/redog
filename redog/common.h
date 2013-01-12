@@ -18,7 +18,7 @@
 #define ITEM_NUM 17770
 #define USER_NUM 480189
 #define MAX_STEP 60
-#define K 30
+#define K 50
 using namespace std;
 
 namespace redog{

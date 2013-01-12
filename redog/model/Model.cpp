@@ -50,8 +50,8 @@ void Model::iterate(){
 	//update();
 	for (step=0; step<MAX_STEP; ++step)
 	{
-        //if(goodEnough()){
-        if(step == MAX_STEP){
+        if(goodEnough()){
+        //if(step == MAX_STEP){
             cout<<" .. succeed end"<<endl;
             //将上次最佳状态的数据写入文件
             //qualisToFile();
@@ -198,6 +198,10 @@ void Model::initMean(){
 	unsigned long sum = 0;
 	for(uint i=0; i<USER_NUM; ++i){
 		for(uint j=0; j<rateMatrix[i].size(); ++j){
+            if(rateMatrix[i][j].score == 0){
+                //skip qualifying datas
+                continue;
+            }
 			++num;
 			sum += rateMatrix[i][j].score;
 		}

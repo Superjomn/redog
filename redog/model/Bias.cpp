@@ -20,6 +20,10 @@ void Bias::init(){
     {//for each user
         for(uint j=0; j<rateMatrix[i].size(); ++j)
         {//for each item of user
+            if(rateMatrix[i][j].score == 0){
+                //skip qualifying datas
+                continue;
+            }
         	temrc = &rateMatrix[j][j];
         	bi[temrc->itemid] += temrc->score - mean;
         	//num of item i's users
@@ -34,6 +38,10 @@ void Bias::init(){
     //for items
     for(int i=0; i<USER_NUM; ++i){
     	for(int j=0; j<rateMatrix[i].size(); ++j){
+            if(rateMatrix[i][j].score == 0){
+                //skip qualifying datas
+                continue;
+            }
     		bu[i] += rateMatrix[i][j].score - mean - bi[rateMatrix[i][j].itemid];
     		//inc
     		++buNum[i];
@@ -53,6 +61,10 @@ void Bias::_initBiBuNum(){
 		buNum[i] = itemnum;
 		for(uint j=0; j<itemnum; ++j){
 			//inc num of item i's rates
+            if(rateMatrix[i][j].score == 0){
+                //skip qualifying datas
+                continue;
+            }
 			++ biNum[j];
 		}
 	}
